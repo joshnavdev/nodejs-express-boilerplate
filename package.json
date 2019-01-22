@@ -5,6 +5,10 @@
   "author": "Joshua Navarro <joshua.navarro35@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "convict": "^4.4.1",
