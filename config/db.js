@@ -8,7 +8,6 @@ export default () => {
   const {
     db: { host, port, database, user, password },
   } = config;
-  // const dbURI = 'mongodb://db_user:password1@ds211275.mlab.com:11275/db_example';
   const dbURI = `mongodb://${user}:${password}@${host}:${port}/${database}`;
 
   mongoose.connect(

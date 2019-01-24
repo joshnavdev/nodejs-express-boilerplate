@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { handleError } from '../utils/helpers/resHandle';
 
 async function getAll(req, res) {
   const User = mongoose.model('User');
@@ -8,8 +9,8 @@ async function getAll(req, res) {
 
     return res.json(users);
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ error: error.message });
+    const errorMessage = handleError(error);
+    return res.status(400).json(errorMessage);
   }
 }
 
@@ -18,14 +19,12 @@ async function createOne(req, res) {
   const User = mongoose.model('User');
 
   try {
-    // const newUser = new User({ name, age });
-    // const newUserSaved = await newUser.save();
     const newUser = await User.create({ name, age });
 
     return res.json(newUser);
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ error: error.message });
+    const errorMessage = handleError(error);
+    return res.status(400).json(errorMessage);
   }
 }
 
