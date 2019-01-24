@@ -1,5 +1,7 @@
 // Basic configuration
-const convict = require('convict');
+// const convict = require('convict');
+import * as fs from 'fs';
+import convict from 'convict';
 
 const conf = convict({
   app: {
@@ -54,9 +56,18 @@ const conf = convict({
   },
 });
 
-// Must create a .env.json file which saves all your private keys
-conf.loadFile('./.env.json');
+// Must create a .env.${env}.json file which saves all your private keys
+// example: .env.development.json which contains all dev configuration
+
+// Load environment dependent configuration
+const env = conf.get('env');
+
+const envFile = `.env.${env}.json`;
+if (fs.existsSync(envFile)) {
+  conf.loadFile(envFile);
+}
 conf.validate({ allowd: 'strict' });
 
 const props = conf.getProperties();
-module.exports = props;
+
+export default props;
