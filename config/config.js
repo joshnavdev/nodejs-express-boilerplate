@@ -1,40 +1,50 @@
 // Basic configuration
-const convict = require('convict');
+import * as fs from 'fs';
+import convict from 'convict';
 
 const conf = convict({
   app: {
     name: {
-      default: 'Proyect Name'
+      default: 'Proyect Name',
     },
     authSecretKey: {
-      default: 'proyectkey'
-    }
+      default: 'proyectkey',
+    },
   },
   appSettings: {
     publicIp: {
       default: 'http://0.0.0.0:4000',
-      env: 'PUBLIC_IP'
+      env: 'PUBLIC_IP',
     },
     timeZone: {
-      default: 'America/Lima'
-    }
+      default: 'America/Lima',
+    },
   },
   appHost: {
-    default: '0.0.0.0'
+    default: '0.0.0.0',
   },
   appPort: {
-    default: '4000'
+    default: '4000',
   },
   env: {
     format: ['production', 'development', 'staging'],
     default: 'development',
-    env: 'NODE_ENV'
+    env: 'NODE_ENV',
   },
 });
 
-// Must create a .env.json file which saves all your private keys
-conf.loadFile('./.env.json');
+// Must create a .env.${env}.json file which saves all your private keys
+// example: .env.development.json which contains all dev configuration
+
+// Load environment dependent configuration
+const env = conf.get('env');
+
+const envFile = `.env.${env}.json`;
+if (fs.existsSync(envFile)) {
+  conf.loadFile(envFile);
+}
 conf.validate({ allowd: 'strict' });
 
 const props = conf.getProperties();
-module.exports = props;
+
+export default props;
