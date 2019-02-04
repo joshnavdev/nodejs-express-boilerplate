@@ -7,4 +7,24 @@ Therefore, this project has many branchs, one for each option you can choose (if
 
 Before to start check this points:
 
-- Make sure to create your '.env.{env}.json' files with your private information (credetians), you must create a file for each enviroment you will have, for example: .env.production.json will be the file por `production`. The enviroments must be: `production`, `development`, `test` & `staging`.
+- ### Create your evironments files
+
+Make sure to create your `.env.{env}.json` files with your private information (credetians), you must create a file for each environment you will have.
+
+For example: `.env.production.json` will be the file por `production`.
+
+The environments must be: `production`, `development`, `test` & `staging`.
+
+Inside your file you must write this initial options (in order to run our project with no fails)
+
+```
+{
+  "db": {
+    "host": "YOUR_DEVELOPMENT_DB_HOST",
+    "port": "YOUR_DEVELOPMENT_DB_PORT",
+    "user": "YOUR_DEVELOPMENT_DB_USER",
+    "password": "YOUR_DEVELOPMENT_DB_PASSWORD",
+    "database": "YOUR_DEVELOPMENT_DB_DATABASE"
+  }
+}
+```
