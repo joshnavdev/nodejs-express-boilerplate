@@ -7,12 +7,12 @@ const app = express();
 const server = Server(app);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Node Express Boilerplate API');
+  res.send(`Welcome to Node Express Boilerplate API ${config.env}`);
 });
 
-require('./config/express').default(app);
-require('./config/db').default(app);
-require('./config/routes').default(app);
+require('./config/express')(app);
+require('./config/db')(app);
+require('./config/routes')(app);
 
 server.on('error', appHelper.onError(server));
 server.on('listening', appHelper.onListening(server));

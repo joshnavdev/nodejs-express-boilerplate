@@ -6,8 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon ."
+    "start": "NODE_ENV=production node .",
+    "start:dev": "NODE_ENV=development nodemon .",
+    "start:staging": "NODE_ENV=staging node .",
+    "start:test": "NODE_ENV=test node ."
   },
   "dependencies": {
     "body-parser": "^1.18.3",
