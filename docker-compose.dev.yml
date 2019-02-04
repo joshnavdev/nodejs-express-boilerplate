@@ -2,7 +2,7 @@ version: '3'
 services:
   api-dev:
     build: .
-    command: npm run dev
+    command: npm run start:dev
     ports:
       - "4001:4000"
     environment:

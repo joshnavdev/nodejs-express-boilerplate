@@ -1,8 +1,8 @@
 version: '3'
 services:
-  api-dev:
+  api-staging:
     build: .
-    command: npm run dev
+    command: npm run start:staging
     ports:
       - "4001:4000"
     environment:
@@ -11,9 +11,9 @@ services:
       - ./:/home/node/app
       - /home/node/app/node_modules
     depends_on:
-      - "mongodb-dev"
+      - "mongodb-staging"
 
-  mongodb-dev:
+  mongodb-staging:
     image: "mongo"
     ports:
       - "27018:27017"
