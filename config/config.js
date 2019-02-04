@@ -1,7 +1,7 @@
 // Basic configuration
-// const convict = require('convict');
 import * as fs from 'fs';
 import convict from 'convict';
+// const convict = require('convict');
 
 const conf = convict({
   app: {
@@ -35,11 +35,11 @@ const conf = convict({
       env: 'DB_DATABASE',
     },
     user: {
-      default: 'dbuser',
+      default: '',
       env: 'DB_USER',
     },
     password: {
-      default: '123456',
+      default: '',
       env: 'DB_PASSWORD',
     },
   },
@@ -71,3 +71,4 @@ conf.validate({ allowd: 'strict' });
 const props = conf.getProperties();
 
 export default props;
+// module.exports = props;

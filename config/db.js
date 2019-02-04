@@ -8,19 +8,17 @@ export default () => {
   const {
     db: { host, port, database, user, password },
   } = config;
-  const dbURI = `mongodb://${user}:${password}@${host}:${port}/${database}`;
+  const auth = user && password ? `${user}:${password}@` : '';
+  const dbURI = `mongodb://${auth}${host}:${port}/${database}`;
 
-  mongoose.connect(
-    dbURI,
-    { useNewUrlParser: true },
-  );
+  mongoose.connect(dbURI, { useNewUrlParser: true });
 
   mongoose.connection.on('connected', () => {
     console.log(`Mongoose default connection open to ${dbURI}`);
   });
 
   mongoose.connection.on('error', (err) => {
-    console.log(`Mongoose default connection error: ${err}`);
+    console.error(`Mongoose default connection error: ${err}`, dbURI);
   });
 
   mongoose.connection.on('disconnected', () => {
