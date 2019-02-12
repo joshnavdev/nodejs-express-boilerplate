@@ -65,7 +65,7 @@ typings/
 .env
 
 # convict environment variables file
-.env.*.json
+.env.*
 
 # text
 /*.txt

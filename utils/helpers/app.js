@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 function onListening(server) {
   return () => {
     const addr = server.address();
@@ -7,7 +8,7 @@ function onListening(server) {
 }
 
 function onError(server) {
-  return e => {
+  return (e) => {
     if (e.code === 'EADDRINUSE') {
       const bind = `${e.address}:${e.port}`;
       console.error(`${bind} is already in use`);
@@ -22,5 +23,5 @@ function onError(server) {
 
 export default {
   onListening,
-  onError
+  onError,
 };

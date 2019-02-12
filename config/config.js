@@ -1,50 +1,34 @@
 // Basic configuration
-import * as fs from 'fs';
-import convict from 'convict';
+import dotenv from 'dotenv';
 
-const conf = convict({
-  app: {
-    name: {
-      default: 'Proyect Name',
-    },
-    authSecretKey: {
-      default: 'proyectkey',
-    },
-  },
-  appSettings: {
-    publicIp: {
-      default: 'http://0.0.0.0:4000',
-      env: 'PUBLIC_IP',
-    },
-    timeZone: {
-      default: 'America/Lima',
-    },
-  },
-  appHost: {
-    default: '0.0.0.0',
-  },
-  appPort: {
-    default: '4000',
-  },
-  env: {
-    format: ['production', 'development', 'staging'],
-    default: 'development',
-    env: 'NODE_ENV',
-  },
-});
-
-// Must create a .env.${env}.json file which saves all your private keys
-// example: .env.development.json which contains all dev configuration
+// Must create a .env.${env} file which saves all your private keys
+// example: .env.development which contains all dev configuration
 
 // Load environment dependent configuration
-const env = conf.get('env');
+const env = process.env.NODE_ENV;
+const dotenvFile = `${__dirname}/../.env.${env}`;
+dotenv.config({ path: dotenvFile });
 
-const envFile = `.env.${env}.json`;
-if (fs.existsSync(envFile)) {
-  conf.loadFile(envFile);
-}
-conf.validate({ allowd: 'strict' });
+const config = {
+  app: {
+    name: process.env.PROJECT_NAME || 'Proyect Name',
+    authSecretKey: process.env.AUTH_SECRET_KEY || 'yeeapikey',
+  },
+  appSettings: {
+    publicIp: process.env.PUBLIC_IP || 'http://0.0.0.0:4000',
+    timeZone: process.env.TIME_ZONE || 'America/Lima',
+  },
+  appHost: '0.0.0.0',
+  appPort: process.env.PORT || '4000',
+  env: process.env.NODE_ENV || 'development',
+  db: {
+    host: process.env.DB_HOST || '0.0.0.0',
+    port: process.env.DB_PORT || '3306',
+    database: process.env.DB_DATABASE || '',
+    user: process.env.DB_USER || '',
+    password: process.env.DB_PASSWORD || '',
+    debugMode: process.env.DB_DEBUG_MODE || false,
+  },
+};
 
-const props = conf.getProperties();
-
-export default props;
+export default config;
