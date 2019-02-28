@@ -3,8 +3,8 @@ services:
   api:
     image: node:9-alpine
     volumes:
-      - .:/usr/src/service
-    working_dir: /usr/src/service
+      - .:/home/node/app
+    working_dir: /home/node/app
     command: npm run start:dev
     ports:
       - 4000:4000
