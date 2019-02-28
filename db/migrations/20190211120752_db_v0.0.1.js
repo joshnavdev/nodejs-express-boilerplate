@@ -3,7 +3,11 @@ exports.up = async (knex, Promise) => {
     knex.schema.createTable('user', (table) => {
       table.increments('id').primary();
       table.string('name', 25).notNullable();
-      table.integer('age').notNullable();
+      table
+        .string('email', 50)
+        .notNullable()
+        .unique();
+      table.string('password', 100).notNullable();
     }),
   ]);
 };

@@ -1,19 +1,16 @@
 version: '3'
 services:
   api:
-    build: .
-    command: npm run start
-    ports:
-      - "4000:4000"
-    env_file:
-      .env.development
-    environment:
-      - NODE_ENV=production
+    image: node:9-alpine
     volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    command: npm run start:dev
+    ports:
+      - 4000:4000
     depends_on:
       - mysql
+    container_name: api-dev
 
   mysql:
     image: mysql:5

@@ -17,6 +17,7 @@
     "db:seed:run": "knex seed:run"
   },
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "convict": "^4.4.1",
