@@ -7,7 +7,7 @@ function onListening(server) {
 }
 
 function onError(server) {
-  return e => {
+  return (e) => {
     if (e.code === 'EADDRINUSE') {
       const bind = `${e.address}:${e.port}`;
       console.error(`${bind} is already in use`);
@@ -20,7 +20,12 @@ function onError(server) {
   };
 }
 
-export default {
+// export default {
+//   onListening,
+//   onError,
+// };
+
+module.exports = {
   onListening,
-  onError
+  onError,
 };
