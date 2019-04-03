@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 function onListening(server) {
   return () => {
     const addr = server.address();
@@ -19,11 +21,6 @@ function onError(server) {
     }
   };
 }
-
-// export default {
-//   onListening,
-//   onError,
-// };
 
 module.exports = {
   onListening,
